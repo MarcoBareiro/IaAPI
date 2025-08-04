@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  # Backend principal (LangChain + FastAPI)
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - OPENAI_API_KEY=tu_api_key_opcional # Si usas OpenAI, o TOGETHER_API_KEY para Together.ai
+      - LLM_MODEL=togethercomputer/Command-R # O el modelo que prefieras
+    depends_on:
+      - redis
+
+  # Redis para caché de fragmentos de datos (opcional pero recomendado)
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    #volumes:
+    #  - redis_data:/data
+
+  # Frontend básico (Streamlit para prototipado rápido - opcional)
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "8501:8501"
+  #   volumes:
+  #     - ./frontend:/app
+  #   depends_on:
+  #     - backend
+#volumes:
+#  redis_data:
