@@ -1,20 +1,21 @@
 version: "3.8"
 
 services:
-  # Backend principal (LangChain + FastAPI)
   backend:
-    build: ./backend
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app
+      - .:/code
     environment:
-      - OPENAI_API_KEY=tu_api_key_opcional # Si usas OpenAI, o TOGETHER_API_KEY para Together.ai
-      - LLM_MODEL=togethercomputer/Command-R # O el modelo que prefieras
+      - TOGETHER_API_KEY=66080cd8c8a367dc181009a94afd1fa8c206d3b9926f2c51f500d1a9f8d51502
+      - LLM_MODEL=meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
+      - PYTHONPATH=/codes
     depends_on:
       - redis
 
-  # Redis para caché de fragmentos de datos (opcional pero recomendado)
   redis:
     image: redis:alpine
     ports:

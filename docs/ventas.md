@@ -14,26 +14,25 @@ Este módulo permite consultar y operar sobre datos de ventas mensuales, objetiv
 - **Ejemplo de respuesta de la acción**
 
 ```json
-{{
-  "mes": "2025-05",
-  "objetivos_por_vendedor": [
-    {{
-      "id_vendedor": 1,
-      "nombre_vendedor": "Carlos Gómez",
-      "sucursal": "Asunción",
-      "objetivo_monto": 50000000,
-      "objetivo_cantidad_ventas": 15
-    }},
-    {{
-      "id_vendedor": 2,
-      "nombre_vendedor": "Laura Rivas",
-      "sucursal": "Luque",
-      "objetivo_monto": 48000000,
-      "objetivo_cantidad_ventas": 13
-    }}
-    // ... más vendedores
-  ]
-}}
+[
+  {{
+    "mes": "2025-05",
+    "id_vendedor": 1,
+    "nombre_vendedor": "Carlos Gómez",
+    "sucursal": "Asunción",
+    "objetivo_monto": 50000000,
+    "objetivo_cantidad_ventas": 15
+  }},
+  {{
+    "mes": "2025-05",
+    "id_vendedor": 2,
+    "nombre_vendedor": "Laura Rivas",
+    "sucursal": "Luque",
+    "objetivo_monto": 48000000,
+    "objetivo_cantidad_ventas": 13
+  }}
+  // ... más registros
+]
 ```
 
 - **Ejemplo JSON esperado**:
@@ -43,6 +42,7 @@ Este módulo permite consultar y operar sobre datos de ventas mensuales, objetiv
   "accion": "get_objetivo_mensual",
   "parametros": {{
     "mes": "2025-05"
-  }}
+  }},
+  "consulta_sql": "SELECT SUM(objetivo_monto) AS total_objetivo_monto"
 }}
 ```
