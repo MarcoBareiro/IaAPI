@@ -34,15 +34,3 @@ Este módulo permite consultar y operar sobre datos de ventas mensuales, objetiv
   // ... más registros
 ]
 ```
-
-- **Ejemplo JSON esperado**:
-
-```json
-{{
-  "accion": "get_objetivo_mensual",
-  "parametros": {{
-    "mes": "2025-05"
-  }},
-  "consulta_sql": "SELECT SUM(objetivo_monto) AS total_objetivo_monto"
-}}
-```

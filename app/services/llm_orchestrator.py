@@ -5,7 +5,7 @@ from langchain_together import Together
 from app.models.schemas import InstruccionModel
 from app.services.ventas_service import get_objetivo_mensual
 from app.utils.json_utils import extract_strict_json
-from app.utils.docs_loader import load_markdown_with_instructions
+from app.utils.docs_loader import load_docs_with_instructions
 from app.utils.tabular_query_engine import ejecutar_sql_sobre_json
 from app.prompts.instrucciones import INSTRUCCIONES_GENERALES
 from app.core.config import TOGETHER_API_KEY, LLM_MODEL
@@ -20,7 +20,7 @@ llm = Together(
     repetition_penalty=1
 )
 
-VENTAS_DOC = load_markdown_with_instructions("docs/ventas.md", INSTRUCCIONES_GENERALES)
+VENTAS_DOC = load_docs_with_instructions("docs/ventas.md", INSTRUCCIONES_GENERALES)
 
 PROMPT = ChatPromptTemplate.from_messages([
     ("system", VENTAS_DOC),

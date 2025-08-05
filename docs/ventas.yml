@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: API de Ventas
+  version: 1.0.0
+  description: API para consultar y operar sobre datos de ventas mensuales, objetivos y métricas.
+paths:
+  /objetivo_mensual:
+    get:
+      summary: Obtiene el objetivo de ventas para un mes específico
+      operationId: getObjetivoMensual
+      parameters:
+        - name: mes
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+            pattern: ^\d{4}-(0[1-9]|1[0-2])$
+            example: "2025-05"
+          description: Fecha en formato YYYY-MM
+      responses:
+        "200":
+          description: Lista de objetivos de ventas por vendedor para el mes especificado
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ObjetivoMensual"
+components:
+  schemas:
+    ObjetivoMensual:
+      type: object
+      required:
+        - mes
+        - id_vendedor
+        - nombre_vendedor
+        - sucursal
+        - objetivo_monto
+        - objetivo_cantidad_ventas
+      properties:
+        mes:
+          type: string
+          format: date
+          pattern: ^\d{4}-(0[1-9]|1[0-2])$
+          example: "2025-05"
+        id_vendedor:
+          type: integer
+          example: 1
+        nombre_vendedor:
+          type: string
+          example: "Carlos Gómez"
+        sucursal:
+          type: string
+          example: "Asunción"
+        objetivo_monto:
+          type: integer
+          example: 50000000
+        objetivo_cantidad_ventas:
+          type: integer
+          example: 15
